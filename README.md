@@ -177,16 +177,14 @@ A field is searchable in OpenSearch if:
 
 * It is indexed
 * It has a searchable type (`text`, `keyword`, `numeric`, `boolean`, `date`, `knn_vector`)
-
-If it’s stored but **not indexed**, it can be returned in results but not searched. ie index is false 
-
+*Basically if the type has some text to search , and the type has a keyword and index is true 
 
 
 ---
 
 ## Summary (Plain English)
 
-* Data flows: **Ingest → SNS → SQS → Product API + DynamoDB → Transform → OpenSearch**
+* Data flows: **Ingest → SNS → SQS → App workflow + Product API + DynamoDB → Transform → OpenSearch**
 * OpenSearch indexes data using **Lucene inverted index**
 * Text is tokenized and stop words removed
 * Schema (mappings) decides what is searchable
@@ -205,6 +203,7 @@ If it’s stored but **not indexed**, it can be returned in results but not sear
   * DynamoDB (local)
   * Other dependent services
 * This helps developers test without using real AWS services.
+
 
 **How to start locally:**
 
@@ -561,6 +560,8 @@ Hybrid  = combine both
 
 ## OpenSearch Core Concepts (Quick Recap)
 
+https://docs.opensearch.org/latest/getting-started/concepts/
+
 ### Indexing & Shards
 
 * Once data is indexed:
@@ -634,6 +635,7 @@ Hybrid         = smart blend of both
 ---
 
 ## Querying for Testing
+https://docs.opensearch.org/latest/getting-started/search-data/#query-dsl
 
 `GET http://localhost:9200/500k_384d_titan_mm_v1/_search`
 
